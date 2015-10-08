@@ -1,12 +1,4 @@
 set(LLVM_LINK_COMPONENTS support)
-set(LLVM_USED_LIBS clangTooling clangBasic clangAST)
+set(LLVM_USED_LIBS clangBasic clangTooling clangDriver clangFrontend clangAST clangASTMatchers clangRewrite)
 
-add_clang_executable(typegrind
-  main.cpp
-  )
-
-target_link_libraries(typegrind
-  clangTooling
-  clangBasic
-  clangASTMatchers
-  )
+ADD_SUBDIRECTORY(src)
