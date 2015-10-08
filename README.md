@@ -104,6 +104,11 @@ Documentation
 The documentation can be found under the `doc` folder in the source, written in markdown, browsable on GitHub.
 
 
+Credits
+---
+
+Typegrind is based on the type-preserving heap profiler developed by Jozsef Mihalicza, as part of his doctoral dissertation: [Analysis and Methods for Supporting Generative Metaprogramming in Large Scale C++ Projects](http://www.tnkcs.inf.elte.hu/vedes/Mihalicza_Jozsef_Ertekezes.pdf)
+
 License
 ---
 
