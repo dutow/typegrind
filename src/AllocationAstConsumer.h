@@ -10,6 +10,7 @@
 
 #include "NewExprHandler.h"
 #include "OpNewExprHandler.h"
+#include "DeleteExprHandler.h"
 
 namespace typegrind {
     class AllocationASTConsumer : public clang::ASTConsumer {
@@ -25,6 +26,7 @@ namespace typegrind {
 
         NewExprHandler mNewExprHandler;
         OpNewExprHandler mOpNewExprHandler;
+        DeleteExprHandler mDeleteExprHandler;
     };
 }
 

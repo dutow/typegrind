@@ -4,6 +4,7 @@ add_clang_executable(clang-typegrind
   AllocationDecoratorAction.cpp
   NewExprHandler.cpp
   OpNewExprHandler.cpp
+  DeleteExprHandler.cpp
   main.cpp
 )
 

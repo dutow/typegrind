@@ -25,6 +25,7 @@ namespace typegrind{
             : mRewriter(rewriter)
             , mNewExprHandler(mRewriter)
             , mOpNewExprHandler(mRewriter)
+            , mDeleteExprHandler(mRewriter)
     {
         using namespace ast_matchers;
         mMatcher.addMatcher(newExpr().bind("newStmt"), &mNewExprHandler);
@@ -36,6 +37,7 @@ namespace typegrind{
                 callExpr(callee(functionDecl(hasName("operator new"))), hasAncestor(reinterpretCastExpr().bind("castExpr"))).bind("newStmt"),
                 &mOpNewExprHandler
         );
+        mMatcher.addMatcher(deleteExpr().bind("deleteStmt"), &mDeleteExprHandler);
     }
 
     void AllocationASTConsumer::HandleTranslationUnit(ASTContext& context)
