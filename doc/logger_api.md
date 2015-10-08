@@ -10,8 +10,8 @@ List of macros
  * `TYPEGRIND_LOG_ALLOC(typeStr, locationStr, newExpression, typeSize)`
  * `TYPEGRIND_LOG_ALLOC_ARRAY(typeStr, locationStr, newExpression, typeSize, arraySize)`
  * `TYPEGRIND_LOG_OP_NEW(typeStr, locationStr, newExpression, typeSize, size)`
- * `TYPEGRIND_LOG_DEALLOC(pointerAddr, deleteExpression)`
- * `TYPEGRIND_LOG_DEALLOC_ARRAY(pointerAddr, deleteExpression)`
+ * `TYPEGRIND_LOG_DEALLOC(pointerAddr, locationStr, deleteExpression)`
+ * `TYPEGRIND_LOG_DEALLOC_ARRAY(pointerAddr, locationStr, deleteExpression)`
  * `TYPEGRIND_LOG_OP_DELETE(pointerAddr, deleteExpression)`
 
 
