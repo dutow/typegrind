@@ -24,8 +24,18 @@ namespace typegrind{
     AllocationASTConsumer::AllocationASTConsumer(clang::Rewriter& rewriter)
             : mRewriter(rewriter)
             , mNewExprHandler(mRewriter)
+            , mOpNewExprHandler(mRewriter)
     {
-        mMatcher.addMatcher(ast_matchers::newExpr().bind("newStmt"), &mNewExprHandler);
+        using namespace ast_matchers;
+        mMatcher.addMatcher(newExpr().bind("newStmt"), &mNewExprHandler);
+        mMatcher.addMatcher(
+                callExpr(callee(functionDecl(hasName("operator new")).bind("newStmt")), hasAncestor(staticCastExpr().bind("castExpr"))) ,
+                &mOpNewExprHandler
+        );
+        mMatcher.addMatcher(
+                callExpr(callee(functionDecl(hasName("operator new")).bind("newStmt")), hasAncestor(reinterpretCastExpr().bind("castExpr"))) ,
+                &mOpNewExprHandler
+        );
     }
 
     void AllocationASTConsumer::HandleTranslationUnit(ASTContext& context)

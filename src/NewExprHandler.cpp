@@ -118,7 +118,7 @@ namespace typegrind {
                 llvm::raw_string_ostream os(macroEnd);
                 // TODO: this assumes that the size expression is const, which isn't always true! => extract expression to a variable
                 newExpr->getArraySize()->printPretty(os, nullptr, clang::PrintingPolicy(result.Context->getPrintingPolicy()));
-                os.str(); // flush!
+                os.flush();
             }
 
 

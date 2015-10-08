@@ -9,6 +9,7 @@
 #include <clang/Rewrite/Core/Rewriter.h>
 
 #include "NewExprHandler.h"
+#include "OpNewExprHandler.h"
 
 namespace typegrind {
     class AllocationASTConsumer : public clang::ASTConsumer {
@@ -23,6 +24,7 @@ namespace typegrind {
         clang::Rewriter& mRewriter;
 
         NewExprHandler mNewExprHandler;
+        OpNewExprHandler mOpNewExprHandler;
     };
 }
 
