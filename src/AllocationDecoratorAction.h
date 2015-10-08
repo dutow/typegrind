@@ -15,7 +15,7 @@ namespace typegrind {
 
     class AllocationDecoratorAction {
     public:
-        AllocationDecoratorAction(clang::Rewriter& rewriter);
+        AllocationDecoratorAction(clang::Rewriter*& rewriter);
 
         AllocationDecoratorAction & operator=(AllocationDecoratorAction const &) = delete;
 
@@ -24,7 +24,7 @@ namespace typegrind {
 
         static bool isCpp(clang::CompilerInstance const& Compiler);
 
-        clang::Rewriter& mRewriter;
+        clang::Rewriter*& mRewriter;
     };
 
 }

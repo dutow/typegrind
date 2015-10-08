@@ -41,7 +41,7 @@ namespace typegrind {
         return original;
     }
 
-    NewExprHandler::NewExprHandler(clang::Rewriter &rewriter)
+    NewExprHandler::NewExprHandler(clang::Rewriter*& rewriter)
             : mRewriter(rewriter)
     {
     }
@@ -102,7 +102,7 @@ namespace typegrind {
             // 3rd parameter: the new call. It's the expression itself
 
             clang::SourceLocation startLoc = getLocationAtExpansionStart(newExpr->getStartLoc(), sm);
-            mRewriter.InsertText(startLoc, macroStart);
+            mRewriter->InsertText(startLoc, macroStart);
 
             // 4th parameter: sizeof type
             std::string macroEnd;
@@ -126,7 +126,7 @@ namespace typegrind {
             macroEnd += ")";
 
             clang::SourceLocation endLoc = getLocationAtExpansionEnd(newExpr->getEndLoc(), sm);
-            mRewriter.InsertTextAfterToken(endLoc, macroEnd);
+            mRewriter->InsertTextAfterToken(endLoc, macroEnd);
         }
     }
 

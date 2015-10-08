@@ -36,16 +36,17 @@ int main(int argc, const char **argv) {
     clang::TextDiagnosticPrinter DiagnosticPrinter(llvm::errs(), &*DiagOpts);
     clang::DiagnosticsEngine Diagnostics(IntrusiveRefCntPtr<clang::DiagnosticIDs>(new clang::DiagnosticIDs()), &*DiagOpts, &DiagnosticPrinter, false);
     clang::SourceManager Sources(Diagnostics, Tool.getFiles());
-    clang::Rewriter rewriter(Sources, DefaultLangOptions);
+    clang::Rewriter* rewriter = nullptr; //(Sources, DefaultLangOptions);
 
     typegrind::AllocationDecoratorAction action(rewriter);
     auto factory = newFrontendActionFactory(&action);
     int result = Tool.run(factory.get());
 
-    if (result == 0) {
+    if (result == 0 && rewriter != nullptr) {
         // success !
         // TODO: add command line options for different settings
         // e. g. just overwriting in memory and running clang with it as an overlay
-        rewriter.overwriteChangedFiles();
+        rewriter->overwriteChangedFiles();
+        delete rewriter;
     }
 }

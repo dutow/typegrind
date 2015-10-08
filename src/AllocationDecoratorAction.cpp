@@ -3,7 +3,7 @@
 
 namespace typegrind {
 
-    AllocationDecoratorAction::AllocationDecoratorAction(clang::Rewriter &rewriter) : mRewriter(rewriter) { }
+    AllocationDecoratorAction::AllocationDecoratorAction(clang::Rewriter*& rewriter) : mRewriter(rewriter) { }
 
     bool AllocationDecoratorAction::isCpp(clang::CompilerInstance const& Compiler) {
         clang::LangOptions const Opts = Compiler.getLangOpts();

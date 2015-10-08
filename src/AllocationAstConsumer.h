@@ -14,14 +14,14 @@
 namespace typegrind {
     class AllocationASTConsumer : public clang::ASTConsumer {
     public:
-        AllocationASTConsumer(clang::Rewriter& rewriter);
+        AllocationASTConsumer(clang::Rewriter*& rewriter);
 
         void HandleTranslationUnit(clang::ASTContext& context) override;
 
     private:
         clang::ast_matchers::MatchFinder mMatcher;
 
-        clang::Rewriter& mRewriter;
+        clang::Rewriter*& mRewriter;
 
         NewExprHandler mNewExprHandler;
         OpNewExprHandler mOpNewExprHandler;

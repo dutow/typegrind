@@ -21,7 +21,7 @@ using namespace clang;
 
 namespace typegrind{
 
-    AllocationASTConsumer::AllocationASTConsumer(clang::Rewriter& rewriter)
+    AllocationASTConsumer::AllocationASTConsumer(clang::Rewriter*& rewriter)
             : mRewriter(rewriter)
             , mNewExprHandler(mRewriter)
             , mOpNewExprHandler(mRewriter)
@@ -40,6 +40,9 @@ namespace typegrind{
 
     void AllocationASTConsumer::HandleTranslationUnit(ASTContext& context)
     {
+        if (mRewriter == nullptr) {
+            mRewriter = new clang::Rewriter(context.getSourceManager(), context.getLangOpts());
+        }
         mMatcher.matchAST(context);
     }
 }

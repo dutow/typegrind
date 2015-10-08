@@ -5,7 +5,7 @@
 #include "OpNewExprHandler.h"
 
 namespace typegrind {
-    OpNewExprHandler::OpNewExprHandler(clang::Rewriter &rewriter)
+    OpNewExprHandler::OpNewExprHandler(clang::Rewriter*& rewriter)
             : mRewriter(rewriter)
     {
     }
@@ -67,7 +67,7 @@ namespace typegrind {
         // 3rd parameter: the new call. It's the expression itself
 
         clang::SourceLocation startLoc = newExpr->getLocStart();
-        mRewriter.InsertText(startLoc, macroStart);
+        mRewriter->InsertText(startLoc, macroStart);
 
         // 4th parameter: sizeof type
         std::string macroEnd;
@@ -88,7 +88,7 @@ namespace typegrind {
         macroEnd += ")";
 
         clang::SourceLocation endLoc = newExpr->getLocEnd();
-        mRewriter.InsertTextAfterToken(endLoc, macroEnd);
+        mRewriter->InsertTextAfterToken(endLoc, macroEnd);
     }
 
     clang::StringRef OpNewExprHandler::getID() const {

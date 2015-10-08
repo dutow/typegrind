@@ -12,13 +12,13 @@ namespace typegrind {
     class OpNewExprHandler : public clang::ast_matchers::MatchFinder::MatchCallback {
     public:
 
-        OpNewExprHandler(clang::Rewriter& rewriter);
+        OpNewExprHandler(clang::Rewriter*& rewriter);
         void run(const clang::ast_matchers::MatchFinder::MatchResult &Result) override;
 
         clang::StringRef getID() const override;
 
     private:
-        clang::Rewriter& mRewriter;
+        clang::Rewriter*& mRewriter;
     };
 }
 
