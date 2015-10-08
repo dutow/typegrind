@@ -57,7 +57,7 @@ Is transformed to:
 int main() {
   int* a = TYPEGRIND_LOG_ALLOC("int*", "example.cpp:6", new int(3), sizeof(int));
   std::cout << *a << std::endl;
-  TYPEGRIND_LOG_DEALLOC(a, delete a);
+  TYPEGRIND_LOG_DEALLOC(a, "example.cpp:8", delete a);
   return 0;
 }
 ```
@@ -71,7 +71,7 @@ Which contains two macros defined in `typegrind/log_to_cout.hpp`, and expands to
 int main() {
   int* a = typegrind::log_cout::alloc("int*", "example.cpp:6", (new int(3)), sizeof(int));
   std::cout << *a << std::endl;
-  typegrind::log_cout::dealloc(a); (delete a);
+  typegrind::log_cout::dealloc(a, "example.cpp:6"); (delete a);
   return 0;
 }
 ```
