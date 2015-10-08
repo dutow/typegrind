@@ -29,11 +29,11 @@ namespace typegrind{
         using namespace ast_matchers;
         mMatcher.addMatcher(newExpr().bind("newStmt"), &mNewExprHandler);
         mMatcher.addMatcher(
-                callExpr(callee(functionDecl(hasName("operator new")).bind("newStmt")), hasAncestor(staticCastExpr().bind("castExpr"))) ,
+                callExpr(callee(functionDecl(hasName("operator new"))), hasAncestor(staticCastExpr().bind("castExpr"))).bind("newStmt") ,
                 &mOpNewExprHandler
         );
         mMatcher.addMatcher(
-                callExpr(callee(functionDecl(hasName("operator new")).bind("newStmt")), hasAncestor(reinterpretCastExpr().bind("castExpr"))) ,
+                callExpr(callee(functionDecl(hasName("operator new"))), hasAncestor(reinterpretCastExpr().bind("castExpr"))).bind("newStmt"),
                 &mOpNewExprHandler
         );
     }

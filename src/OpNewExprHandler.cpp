@@ -21,7 +21,7 @@ namespace typegrind {
         }
         if (nullptr == newExpr)
         {
-            llvm::errs() << "Couldn't convert MatcherResult to CXXNewExpr!\n";
+            llvm::errs() << "Couldn't convert MatcherResult to CallExpr!\n";
             return;
         }
         // Skipping substituted template types
@@ -43,7 +43,7 @@ namespace typegrind {
         // Currently it is the concrete name if we can place it in the source without generating a template specialization
         // otherwise it's based on typeid, so we are missing a demangle function ...
 
-        auto allocatedType = castExpr->getType();
+        auto allocatedType = castExpr->getType()->getPointeeType();
         if (allocatedType.getTypePtr()->isTemplateTypeParmType()) {
             // TODO: somehow add compiler specific demangle ...
             // We could generate a (manual) specialization for this function, but for now, this is enough
@@ -81,7 +81,7 @@ namespace typegrind {
         // TODO: extract it to a variable!
         macroEnd += ", ";
         llvm::raw_string_ostream os(macroEnd);
-        newExpr->getArg(1)->printPretty(os, nullptr, clang::PrintingPolicy(result.Context->getPrintingPolicy()));
+        newExpr->getArg(0)->printPretty(os, nullptr, clang::PrintingPolicy(result.Context->getPrintingPolicy()));
         os.flush();
 
         // end added function call
