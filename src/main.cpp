@@ -14,6 +14,7 @@ using namespace llvm;
 static llvm::cl::OptionCategory typegrindCategory("typegrind");
 static cl::opt<bool> typegrindOptBuildCode("build", cl::desc("Build the modified code automatically with clang."), cl::cat(typegrindCategory));
 static cl::opt<std::string> typegrindOptSave("save", cl::desc("Save the modified files according to the specified mapping."), cl::value_desc("Mapping file"), cl::cat(typegrindCategory));
+static cl::opt<bool> typegrindOptSaveEverything("save-everything", cl::desc("Save everything used by the compilation, not just modified files."), cl::cat(typegrindCategory));
 static cl::extrahelp CommonHelp(CommonOptionsParser::HelpMessage);
 static cl::extrahelp MoreHelp(R"(
 Typegrind preprocesses C++ source files and instruments them with type preserving heap logging instructions.
