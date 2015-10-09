@@ -71,7 +71,7 @@ Which contains two macros defined in `typegrind/log_to_cout.hpp`, and expands to
 int main() {
   int* a = typegrind::log_cout::alloc("int*", "example.cpp:6", (new int(3)), sizeof(int));
   std::cout << *a << std::endl;
-  typegrind::log_cout::dealloc(a, "example.cpp:6"); (delete a);
+  typegrind::log_cout::dealloc(a, "example.cpp:8"); (delete a);
   return 0;
 }
 ```
@@ -109,7 +109,10 @@ The documentation can be found under the `doc` folder in the source, written in 
 Credits
 ---
 
-Typegrind is based on the type-preserving heap profiler developed by Jozsef Mihalicza, as part of his doctoral dissertation: [Analysis and Methods for Supporting Generative Metaprogramming in Large Scale C++ Projects](http://www.tnkcs.inf.elte.hu/vedes/Mihalicza_Jozsef_Ertekezes.pdf)
+Typegrind is based on:
+ * J. Mihalicza, Z. Porkoláb, and A. Gábor, [Type-preserving heap profiler for C++](http://dx.doi.org/10.1109/ICSM.2011.6080813) (2011)
+ * J. Mihalicza, [Analysis and Methods for Supporting Generative Metaprogramming in Large Scale C++ Projects](http://www.tnkcs.inf.elte.hu/vedes/Mihalicza_Jozsef_Ertekezes.pdf) (2014)
+ * The type-preserving heap-profiler used by [NNG Llc.](http://nng.com/en/), also based on the above articles
 
 License
 ---
