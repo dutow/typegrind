@@ -9,7 +9,7 @@
 #include <clang/Frontend/FrontendPluginRegistry.h>
 #include <clang/Frontend/CompilerInstance.h>
 
-#include "AllocationAstConsumer.h"
+#include "common/AllocationAstConsumer.h"
 
 namespace typegrind {
 

@@ -2,10 +2,10 @@
 #include <clang/Frontend/FrontendActions.h>
 #include <clang/Tooling/CommonOptionsParser.h>
 #include <clang/Tooling/Tooling.h>
-#include <llvm/Support/CommandLine.h>
 #include "clang/Frontend/TextDiagnosticPrinter.h"
 
-#include "AllocationDecoratorAction.h"
+#include "common/AllocationDecoratorAction.h"
+#include "tool/CompilerLikeOptionsParser.h"
 
 using namespace clang::tooling;
 using namespace llvm;
@@ -33,7 +33,13 @@ The expected mapping is a JSON file, for example:
 )");
 
 int main(int argc, const char **argv) {
-    CommonOptionsParser OptionsParser(argc, argv, typegrindCategory);
+    CompilerLikeOptionsParser OptionsParser(argc, argv, typegrindCategory);
+
+    llvm::outs() << "Sources\n";
+    for(auto const& s: OptionsParser.getSourcePathList()) {
+        llvm::outs() << "Source: " << s << "\n";
+    }
+
     ClangTool Tool(OptionsParser.getCompilations(),
                    OptionsParser.getSourcePathList());
 
@@ -54,14 +60,21 @@ int main(int argc, const char **argv) {
     int result = Tool.run(factory.get());
 
     if (result == 0 && rewriter != nullptr) {
-        if (typegrindOptSave != "") {
+/*        if (typegrindOptSave != "") {
             // save the files. If we have to build too, this is probably the faster
 
         }
         if (typegrindOptBuildCode) {
             // let's build it!
+            clang::outs() << "let's build\n";
+            for(auto& comm: OptionsParser.getCompilations().getAllCompileCommands()) {
+                comm
+            }
+            }
         }
-        rewriter->overwriteChangedFiles();
+        if (typegrindOptSave != "") { // TODO
+            rewriter->overwriteChangedFiles();
+        }*/
         delete rewriter;
     }
 }

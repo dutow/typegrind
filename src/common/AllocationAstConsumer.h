@@ -8,9 +8,9 @@
 #include <clang/Frontend/CompilerInstance.h>
 #include <clang/Rewrite/Core/Rewriter.h>
 
-#include "NewExprHandler.h"
-#include "OpNewExprHandler.h"
-#include "DeleteExprHandler.h"
+#include "common/handler/NewExprHandler.h"
+#include "common/handler/OpNewExprHandler.h"
+#include "common/handler/DeleteExprHandler.h"
 
 namespace typegrind {
     class AllocationASTConsumer : public clang::ASTConsumer {
